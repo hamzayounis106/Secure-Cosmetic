@@ -1,7 +1,6 @@
 import React from 'react';
 import { getMembers } from '../actions/memberActions';
 import MemberCard from './MemberCard';
-import PaginationComponent from '@/components/PaginationComponent';
 import { GetMemberParams } from '@/types';
 import EmptyState from '@/components/EmptyState';
 
@@ -10,7 +9,7 @@ export default async function MembersPage({
 }: {
   searchParams: GetMemberParams;
 }) {
-  const { items: members, totalCount } = await getMembers(searchParams);
+  const { items: members } = await getMembers(searchParams);
   if (members.length === 0) return <EmptyState />;
 
   return (
@@ -21,7 +20,6 @@ export default async function MembersPage({
             <MemberCard member={member} key={member.id} />
           ))}
       </div>
-      <PaginationComponent totalCount={totalCount} />
     </>
   );
 }
